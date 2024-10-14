@@ -1,0 +1,8 @@
+<!-- src/app/components/tourist-place.component.html -->
+<h2>Tourist Places</h2>
+<ul>
+  <li *ngFor="let place of places">
+    <h3>{{ place.placename }}</h3>
+    <p>{{ place.description }}</p>
+  </li>
+</ul>

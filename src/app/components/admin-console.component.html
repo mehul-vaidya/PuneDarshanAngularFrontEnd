@@ -1,0 +1,10 @@
+<h2>admin-console works!</h2>
+<form [formGroup]="placeUpdateForm" (ngSubmit)="onSubmit()">
+  <label for="placename">placename</label>
+  <input formControlName="placename" type="text" id="placename" />
+
+  <label for="description">description</label>
+  <input formControlName="description" type="text" id="description" />
+
+  <button type="submit">Update Place</button>
+</form>
