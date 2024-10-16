@@ -8,3 +8,14 @@
 
   <button type="submit">Update Place</button>
 </form>
+
+
+<hr />
+
+<!-- Delete Tourist Place Form -->
+<form [formGroup]="placeDeleteForm" (ngSubmit)="onSubmitDelete()">
+  <label for="placenameDelete">Placename to Delete</label>
+  <input formControlName="placenameDelete" type="text" id="placenameDelete" />
+
+  <button type="submit">Delete Place</button>
+</form>

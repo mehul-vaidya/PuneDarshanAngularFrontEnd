@@ -9,12 +9,17 @@ import { Router } from '@angular/router';
 })
 export class AdminConsoleComponent {
   placeUpdateForm: FormGroup;
+  placeDeleteForm: FormGroup;
 
   constructor(private fb: FormBuilder, private touristPlaceService: TouristPlaceService, private router: Router) {
     this.placeUpdateForm = this.fb.group({
       placename: ['', Validators.required],
       description: ['', Validators.required]
     });
+
+    this.placeDeleteForm = this.fb.group({
+      placenameDelete: ['', Validators.required]
+    })
   }
 
   onSubmit() {
@@ -29,4 +34,40 @@ export class AdminConsoleComponent {
       });
     }
   }
+
+/*
+  onSubmitDelete() {
+    if (this.placeDeleteForm.valid) {
+      this.touristPlaceService.deletePlace(this.placeDeleteForm.value).subscribe({
+        next: (response) => {
+          alert('Deleted Successfully');
+        },
+        error: () => {
+          alert('Error in Deletion');
+        }
+      });
+    }
+  }
+*/
+
+  onSubmitDelete() {
+    if (this.placeDeleteForm.valid) {
+      const placeName = this.placeDeleteForm.value.placenameDelete;
+      this.touristPlaceService.deletePlace(placeName).subscribe({
+        next: (response) => {
+          if (response.success_or_fail === 'Success') {
+           alert('Tourist place deleted successfully.');
+           this.placeDeleteForm.reset();
+          } else {
+           alert('Failed to delete the tourist place.');
+          }
+        },
+        error: () => {
+          alert('Error in Deletion');
+        },
+      });
+    }
+  }
+
+
 }

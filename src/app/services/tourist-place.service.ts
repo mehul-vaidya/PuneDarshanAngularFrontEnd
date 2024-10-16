@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TouristPlace } from '../models/tourist-place.model';
 import { TouristPlaceUpdate } from '../models/tourist-place-update.model';
+import { TouristPlaceDelete } from '../models/tourist-place-delete.model';
+import { Response } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +27,30 @@ export class TouristPlaceService {
     const headers = new HttpHeaders({
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         });
-      console.log(updatePlace);
-      console.log(headers)
+      //console.log(updatePlace);
+      //console.log(headers)
 
     return this.http.post<TouristPlace>(this.apiUrlAdmin,updatePlace,{ headers });
   }
 
+  /*
+  deletePlace(deletePlace : TouristPlaceDelete): Observable<any>{
+      const headers = new HttpHeaders({
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          });
+        //console.log(deletePlace.get('placenameDelete'));
+        //console.log(headers)
+        this.apiUrlAdmin += "/";
+        this.apiUrlAdmin += "/";
+      return this.http.delete<TouristPlace>(this.apiUrlAdmin,{headers});
+    }
+  */
+
+  deletePlace(placename: string): Observable<any> {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      });
+      const url = `${this.apiUrlAdmin}/${placename}`; // DELETE request for a specific place
+      return this.http.delete<Response>(url, { headers});
+    }
 }
